@@ -1,0 +1,23 @@
+server:
+  address: localhost
+  port: 8082
+
+spring:
+  application:
+    name: bank-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/egs_bank?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=yes&characterEncoding=utf8
+    username: egs_user
+    password: egs_pass
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Tehran
+logging:
+  level:
+    root: INFO
