@@ -14,14 +14,15 @@ import java.time.ZonedDateTime;
 
 @Service
 public class CardAuthorizationService {
-    private final int MAX_TRY_COUNT = 3;
-
     private final CardRepository cardRepository;
     private final SessionRepository sessionRepository;
+    private final CardAuthorizationHelperService cardAuthorizationHelperService;
 
-    public CardAuthorizationService(CardRepository cardRepository, SessionRepository sessionRepository) {
+    public CardAuthorizationService(CardRepository cardRepository, SessionRepository sessionRepository,
+                                    CardAuthorizationHelperService cardAuthorizationHelperService) {
         this.cardRepository = cardRepository;
         this.sessionRepository = sessionRepository;
+        this.cardAuthorizationHelperService = cardAuthorizationHelperService;
     }
 
     public Card validateAuthRequest(AuthorizationRequest request) {
@@ -30,8 +31,6 @@ public class CardAuthorizationService {
         Assert.notNull(card, "Card Not Found");
 
         Assert.isEquals(card.getCardStatus(), CardStatus.Valid, "Card Status is " + card.getCardStatus().name());
-
-        int tryCount = card.getAuthCount();
 
         String hashCode = null;
         switch (request.getAuthMethod()) {
@@ -45,20 +44,11 @@ public class CardAuthorizationService {
         try {
             Assert.isEquals(hashCode, request.getHashCode(), "Hash Code is not correct");
         } catch (BankException ex) {
-            tryCount++;
-            card.setAuthCount(tryCount);
-            if (tryCount == MAX_TRY_COUNT) {
-                card.setCardStatus(CardStatus.InvalidByWrongPin);
-            }
-            cardRepository.save(card);
+            cardAuthorizationHelperService.incrementTryCount(card);
             throw ex;
         }
 
-        // successful auth, so set tryCount to zero
-        if (tryCount != 0) {
-            card.setAuthCount(0);
-            cardRepository.save(card);
-        }
+        cardAuthorizationHelperService.resetTryCount(card);
 
         return card;
     }
