@@ -1,0 +1,18 @@
+server:
+  address: localhost
+  port: 8081
+
+spring:
+  application:
+    name: atm-service
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Tehran
+logging:
+  level:
+    root: INFO
+
+feign:
+  hystrix:
+    enabled: true
