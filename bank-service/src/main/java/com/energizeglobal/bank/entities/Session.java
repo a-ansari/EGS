@@ -1,10 +1,17 @@
 package com.energizeglobal.bank.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "session")
+@Getter
+@Setter
+@ToString
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,30 +21,4 @@ public class Session {
     private Card card;
 
     private ZonedDateTime creationTime;
-
-    /**************************************************************************/
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public ZonedDateTime getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(ZonedDateTime creationTime) {
-        this.creationTime = creationTime;
-    }
 }
