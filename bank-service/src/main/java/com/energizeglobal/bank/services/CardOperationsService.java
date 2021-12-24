@@ -49,7 +49,7 @@ public class CardOperationsService {
     public Long withdraw(Card card, Long amount) {
         Account account = card.getAccount();
         long newBalance = account.getBalance() - amount;
-        Assert.isTrue(newBalance > 0, "Insufficient Account Balance");
+        Assert.isTrue(newBalance >= 0, "Insufficient Account Balance");
         account.setBalance(newBalance);
         accountRepository.save(account);
         return account.getBalance();

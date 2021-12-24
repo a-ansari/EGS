@@ -61,10 +61,10 @@ CREATE TABLE `event_log`
     `card_number` varchar(100) DEFAULT NULL,
     `event_data`  varchar(255) DEFAULT NULL,
     `event_time`  datetime(6)  NOT NULL,
-    `event_type`  varchar(100) NOT NULL,
+    `event_type`  varchar(20) NOT NULL,
+    `event_state`  varchar(20) NOT NULL,
     `session_id`  bigint(20)   DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `FK_EVENT_LOG_SESSION` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`)
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;

@@ -1,5 +1,6 @@
 package com.energizeglobal.bank.entities;
 
+import com.energizeglobal.bank.enums.EventState;
 import com.energizeglobal.bank.enums.EventType;
 
 import javax.persistence.*;
@@ -15,14 +16,16 @@ public class EventLog {
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
+    @Enumerated(EnumType.STRING)
+    private EventState eventState;
+
     private ZonedDateTime eventTime;
 
     private String eventData;
 
     private String cardNumber;
 
-    @ManyToOne
-    private Session session;
+    private Long sessionId;
 
     /**************************************************************************/
 
@@ -40,6 +43,14 @@ public class EventLog {
 
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
+    }
+
+    public EventState getEventState() {
+        return eventState;
+    }
+
+    public void setEventState(EventState eventState) {
+        this.eventState = eventState;
     }
 
     public ZonedDateTime getEventTime() {
@@ -66,11 +77,11 @@ public class EventLog {
         this.cardNumber = cardNumber;
     }
 
-    public Session getSession() {
-        return session;
+    public Long getSessionId() {
+        return sessionId;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
     }
 }

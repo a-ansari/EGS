@@ -1,6 +1,7 @@
 package com.energizeglobal.bank.controllers;
 
 import com.energizeglobal.bank.models.atm.AuthorizationRequest;
+import com.energizeglobal.bank.models.atm.BalanceRequest;
 import com.energizeglobal.bank.models.atm.DepositRequest;
 import com.energizeglobal.bank.models.atm.WithdrawRequest;
 import com.energizeglobal.bank.models.response.BaseResponse;
@@ -27,7 +28,10 @@ public class AtmController {
     @GetMapping("/balance")
     public BaseResponse balance(@RequestParam @NotNull String cardNumber,
                                 @RequestParam @NotNull Long sessionId) {
-        return atmService.balance(cardNumber, sessionId);
+        BalanceRequest request = new BalanceRequest();
+        request.setCardNumber(cardNumber);
+        request.setSessionId(sessionId);
+        return atmService.balance(request);
     }
 
     @PostMapping("/deposit")

@@ -5,13 +5,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
 @ToString
-public class WithdrawRequest extends BaseAuthorizedRequest {
+public class BaseAuthorizedRequest extends BaseUnauthorizedRequest {
     @NotNull
-    @Positive
-    private Long amount;
+    private Long sessionId;
 }
