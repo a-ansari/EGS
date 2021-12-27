@@ -9,6 +9,6 @@ public class ATMClientConfiguration {
 
     @Bean
     public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-        return new BasicAuthRequestInterceptor("APP_USER", "APP_PASS");
+        return new BasicAuthRequestInterceptor("EGS_USER", "EGS_PASS");
     }
 }

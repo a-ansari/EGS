@@ -15,5 +15,5 @@ VALUES (100, '123-8000-10171217-001', 'Valid', 1000000, '2021-12-23 15:00:00.000
 
 INSERT INTO `card` (`id`, `auth_count`, `card_number`, `card_status`, `cvv2`, `expiration_date`, `finger_print_hash`,
                     `pin_code_hash`, `account_id`)
-VALUES (1000, 0, '5022-1234-8520-5678', 'Valid', 123, '2025-01-01', NULL, NULL, 100),
+VALUES (1000, 0, '5022-1234-8520-5678', 'Valid', 123, '2025-01-01', NULL, '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 100),
        (1001, 1, '5022-2910-1234-5678', 'Valid', 1, '2025-02-02', NULL, NULL, 102);
